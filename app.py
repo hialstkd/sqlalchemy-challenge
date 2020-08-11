@@ -63,7 +63,7 @@ def def_start(start):
     
     return jsonify(dict_start)
 
-@app.route('/api/v1.0/<start>/<end><br/>')
+@app.route('/api/v1.0/<start>/<end>')
 def start_end(start, end):
     query_start_end = session.query(func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)).\
         filter(Measurement.date >= start).filter(Measurement.date <= end).all()
@@ -100,7 +100,7 @@ def precipitation():
 
 @app.route('/api/v1.0/stations')
 def stations():
-    sel = [Station.station, Station.name, Station,latitude, Station.longitude, Station,elevation]
+    sel = [Station.station, Station.name, Station.latitude, Station.longitude, Station.elevation]
     query_station = session.query(*sel).all()
 
     session.close()
